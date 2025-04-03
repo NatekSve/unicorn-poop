@@ -1,0 +1,73 @@
+@echo off
+title CRAZY RAINBOW PARTY
+mode 1000
+color 0A
+setlocal EnableDelayedExpansion
+
+:: MENU
+:menu
+cls
+echo ===================================
+echo        CRAZY RAINBOW PARTY
+echo ===================================
+echo [1] START THE MAYHEM
+echo [2] EXIT
+echo ===================================
+set /p choice=Enter your choice: 
+
+if "%choice%"=="1" goto start
+if "%choice%"=="2" exit
+goto menu
+
+:: START THE CHAOS
+:start
+cls
+echo GET READY...
+timeout /t 3 /nobreak >nul
+
+:: LOOPING RAINBOW COLORS
+for /L %%A in (1,1,50) do (
+    color %%A
+    timeout /t 1 /nobreak >nul
+)
+
+:: HIGH CONTRAST MODE (Toggles ON)
+powershell.exe -Command "(New-Object -ComObject WScript.Shell).SendKeys('^%{I}')"
+timeout /t 1 /nobreak >nul
+
+:: RANDOM WINDOWS SPAM
+for /L %%A in (1,1,20) do (
+    start notepad
+    start calc
+    timeout /t 1 /nobreak >nul
+)
+
+:: PIXELATED SCREEN (Fake flicker effect)
+for /L %%A in (1,1,10) do (
+    start /max cmd
+    timeout /t 1 /nobreak >nul
+    taskkill /f /im cmd.exe
+)
+
+:: SCREEN ZOOM SPAM
+start magnify
+timeout /t 2 /nobreak >nul
+powershell.exe -Command "(New-Object -ComObject WScript.Shell).SendKeys('^{+}')"
+timeout /t 1 /nobreak >nul
+powershell.exe -Command "(New-Object -ComObject WScript.Shell).SendKeys('^{-}')"
+timeout /t 1 /nobreak >nul
+
+:: CRAZY MOUSE MOVEMENT
+powershell -c "$i=1; while($i -lt 20) { $x = Get-Random -Minimum 0 -Maximum 1920; $y = Get-Random -Minimum 0 -Maximum 1080; [System.Windows.Forms.Cursor]::Position = New-Object System.Drawing.Point($x, $y); Start-Sleep -Milliseconds 200; $i++ }"
+
+:: RESTORE EVERYTHING BACK TO NORMAL
+timeout /t 5 /nobreak >nul
+taskkill /F /IM magnify.exe
+taskkill /F /IM notepad.exe
+taskkill /F /IM calc.exe
+powershell.exe -Command "(New-Object -ComObject WScript.Shell).SendKeys('^%{I}')"
+color 07
+cls
+echo PARTY OVER! Windows is normal again.
+pause
+goto menu
