@@ -1,0 +1,49 @@
+Set objShell = CreateObject("WScript.Shell")
+
+' Function to check if SendKeys works
+Sub SafeSendKeys(key)
+    On Error Resume Next
+    objShell.SendKeys key
+    If Err.Number <> 0 Then
+        WScript.Echo "Error sending key: " & key
+        Err.Clear
+    End If
+    On Error GoTo 0
+End Sub
+
+' Function to change screen colors
+Sub ChangeColors()
+    For i = 1 To 30
+        SafeSendKeys "{F14}" ' Placeholder for actual color change logic
+        WScript.Sleep 1000
+    Next
+End Sub
+
+' Function to pixelate screen
+Sub PixelateScreen()
+    For i = 1 To 10
+        SafeSendKeys "{F15}" ' Placeholder for actual pixelation logic
+        WScript.Sleep 100
+    Next
+End Sub
+
+' Function to create rainbow effect
+Sub RainbowEffect()
+    For i = 1 To 10
+        SafeSendKeys "{F16}" ' Placeholder for actual rainbow effect logic
+        WScript.Sleep 100
+    Next
+End Sub
+
+' Main execution
+ChangeColors()
+WScript.Sleep 1000
+PixelateScreen()
+WScript.Sleep 1000
+RainbowEffect()
+
+' Reset screen to normal
+WScript.Sleep 1000
+SafeSendKeys "{F17}" ' Reset screen
+
+WScript.Echo "Script execution finished."
